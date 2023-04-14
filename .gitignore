@@ -1,0 +1,13 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+
+.project
+.vscode/
+coverage.out
+
+# compile HTML
+
+# log dirs
+
