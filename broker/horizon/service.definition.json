@@ -1,0 +1,31 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "Edge Xpert's MQTT Broker",
+    "public": false,
+    "documentation": "",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [],
+    "userInput": [],
+    "deployment": {
+        "services": {
+            "${SERVICE_NAME}": {
+                "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
+                "privileged": false,
+                "network": "",
+                "secrets": {},
+                "user": "2002:2001",
+                "binds": [
+                    "mosquitto-log:/mosquitto/log",
+                    "mosquitto-data:/mosquitto/data"
+                ],
+                "ports": [{
+                    "HostPort": "1883:1883/tcp"
+                }]
+            }
+        }
+    }
+}

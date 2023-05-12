@@ -1,0 +1,7 @@
+{
+  "properties": [
+    { "name": "model", "value": "foobar" }
+  ],
+  "constraints": [
+  ]
+}

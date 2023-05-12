@@ -1,0 +1,78 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "Edge Xpert's Virtual Device",
+    "public": false,
+    "documentation": "",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "mqtt-broker",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "core-metadata",
+            "version": "0.0.1",
+            "arch": "amd64"
+        }
+    ],
+    "userInput": [
+        {
+            "name": "EDGEX_SECURITY_SECRET_STORE",
+            "type": "boolean",
+            "defaultValue": "false"
+        },
+        {
+            "name": "SERVICE_SERVERBINDADDR",
+            "type": "string",
+            "defaultValue": "0.0.0.0"
+        },
+        {
+            "name": "CLIENTS_CORE_METADATA_HOST",
+            "type": "string",
+            "defaultValue": "core-metadata"
+        },
+        {
+            "name": "MESSAGEQUEUE_HOST",
+            "type": "string",
+            "defaultValue": "mqtt-broker"
+        },
+        {
+            "name": "SERVICE_HOST",
+            "type": "string",
+            "defaultValue": "device-virtual"
+        }
+    ],
+    "deployment": {
+        "services": {
+            "${SERVICE_NAME}": {
+                "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
+                "entrypoint": [
+                    "/device-virtual"
+                ],
+                "command": [
+                    "ENV EDGEXPERT_USE_CONSUL false"
+                ],
+                "privileged": false,
+                "network": "",
+                "secrets": {},
+                "user": "2002:2001",
+                "binds": [
+                    "/etc/localtime:/etc/localtime:ro",
+                    "license-data:/edgexpert/licenses/:ro"
+                ],
+                "ports": [
+                    {
+                        "HostPort": "59900:59900/tcp"
+                    }
+                ]
+            }
+        }
+    }
+}

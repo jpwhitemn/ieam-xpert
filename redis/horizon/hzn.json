@@ -1,0 +1,9 @@
+{
+    "HZN_ORG_ID": "iottechsys",
+    "MetadataVars": {
+        "DOCKER_IMAGE_BASE": "jpwhite/redis",
+        "SERVICE_NAME": "redis",
+        "SERVICE_VERSION": "0.0.1",
+        "APP_BIND_HORIZON_DIR":"/var/local/horizon"
+    }
+}

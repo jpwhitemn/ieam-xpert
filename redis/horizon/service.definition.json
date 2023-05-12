@@ -1,0 +1,32 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "Edge Xpert's Redis DB",
+    "public": false,
+    "documentation": "",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [],
+    "userInput": [],
+    "deployment": {
+        "services": {
+            "${SERVICE_NAME}": {
+                "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
+                "privileged": false,
+                "network": "",
+                "secrets": {},
+                "user": "root:root",
+                "binds": [
+                    "/etc/localtime:/etc/localtime:ro"
+                ],
+                "ports": [
+                    {
+                        "HostPort": "6379:6379/tcp"
+                    }
+                ]
+            }
+        }
+    }
+}

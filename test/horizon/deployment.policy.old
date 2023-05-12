@@ -1,0 +1,20 @@
+{
+  "label": "$SERVICE_NAME Deployment Policy",
+  "description": "A super-simple sample Horizon Deployment Policy",
+  "service": {
+    "name": "$SERVICE_NAME",
+    "org": "$HZN_ORG_ID",
+    "arch": "*",
+    "serviceVersions": [
+      {
+        "version": "$SERVICE_VERSION",
+        "priority":{}
+      }
+    ]
+  },
+  "properties": [
+  ],
+  "constraints": [
+    "model == \"foobar\""
+  ]
+}

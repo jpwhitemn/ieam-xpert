@@ -1,0 +1,30 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "Edge Xpert's TimescaleDB",
+    "public": false,
+    "documentation": "",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [],
+    "userInput": [
+        {"name":"POSTGRES_DB", "type":"string","defaultValue":"edgex"},
+        {"name":"POSTGRES_USER", "type":"string","defaultValue":"iotechuser"},
+        {"name":"POSTGRES_PASSWORD", "type":"string","defaultValue":"p@55w0rd"}
+    ],
+    "deployment": {
+        "services": {
+            "timescaledb": {
+                "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
+                "privileged": false,
+                "network": "",
+                "secrets": {},
+                "binds": [
+                    "/etc/localtime:/etc/localtime:ro",
+                    "timescaledb-data:/var/lib/postgresql/data:z"
+                ]            }
+        }
+    }
+}

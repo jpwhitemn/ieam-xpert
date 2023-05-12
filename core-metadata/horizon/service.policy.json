@@ -1,0 +1,7 @@
+{
+    "description": "a policy for your service",
+    "properties": [],
+    "constraints": [
+        "configuration == \"Xpert\""
+    ]
+}

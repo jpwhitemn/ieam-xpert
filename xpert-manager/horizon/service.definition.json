@@ -1,0 +1,106 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "Edge Xpert's UI",
+    "public": false,
+    "documentation": "",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "redis",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "core-command",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "core-data",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "core-metadata",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "device-virtual",
+            "version": "0.0.1",
+            "arch": "amd64"
+        }
+    ],
+    "userInput": [
+        {
+            "name": "DATABASES_PRIMARY_HOST",
+            "type": "string",
+            "defaultValue": "redis"
+        },
+        {
+            "name": "EDGEX_SECURITY_SECRET_STORE",
+            "type": "boolean",
+            "defaultValue": "false"
+        },
+        {
+            "name": "SERVICE_SERVERBINDADDR",
+            "type": "string",
+            "defaultValue": "0.0.0.0"
+        },
+        {
+            "name": "CLIENTS_CORE_METADATA_HOST",
+            "type": "string",
+            "defaultValue": "core-metadata"
+        },
+        {
+            "name": "CLIENTS_CORE_DATA_HOST",
+            "type": "string",
+            "defaultValue": "core-data"
+        },
+        {
+            "name": "CLIENTS_CORE_COMMAND_HOST",
+            "type": "string",
+            "defaultValue": "core-command"
+        },
+        {
+            "name": "SERVICE_HOST",
+            "type": "string",
+            "defaultValue": "xpert-manager"
+        }
+    ],
+    "deployment": {
+        "services": {
+            "${SERVICE_NAME}": {
+                "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
+                "entrypoint": [
+                    "/edgexpert-manager"
+                ],
+                "command": [
+                    "ENV EDGEXPERT_USE_CONSUL false"
+                ],
+                "privileged": false,
+                "network": "",
+                "secrets": {},
+                "user": "2002:2001",
+                "binds": [
+                    "/etc/localtime:/etc/localtime:ro",
+                    "license-data:/edgexpert/licenses/:ro"
+                ],
+                "ports": [
+                    {
+                        "HostPort": "9090:9090/tcp"
+                    }
+                ]
+            }
+        }
+    }
+}

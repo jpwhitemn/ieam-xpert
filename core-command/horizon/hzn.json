@@ -1,0 +1,8 @@
+{
+    "HZN_ORG_ID": "iottechsys",
+    "MetadataVars": {
+        "DOCKER_IMAGE_BASE": "jpwhite/edgexpert-core-command",
+        "SERVICE_NAME": "core-command",
+        "SERVICE_VERSION": "0.0.1"
+    }
+}

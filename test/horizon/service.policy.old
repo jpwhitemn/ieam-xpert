@@ -1,0 +1,8 @@
+{
+    "description": "a policy for your service",
+    "properties": [
+    ],
+    "constraints": [
+	"model == \"foobar\""
+	]
+}

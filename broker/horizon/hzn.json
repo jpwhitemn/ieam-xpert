@@ -1,0 +1,8 @@
+{
+    "HZN_ORG_ID": "iottechsys",
+    "MetadataVars": {
+        "DOCKER_IMAGE_BASE": "jpwhite/eclipse-mosquitto",
+        "SERVICE_NAME": "mqtt-broker",
+        "SERVICE_VERSION": "2.0.15"
+    }
+}

@@ -1,0 +1,103 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "Edge Xpert's Core Metadata",
+    "public": false,
+    "documentation": "",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "redis",
+            "version": "0.0.1",
+            "arch": "amd64"
+        }
+    ],
+    "userInput": [
+        {
+            "name": "DISCREPANCYPACKAGECONFIG_MQTTCONFIG_BROKERADDRESS",
+            "type": "string",
+            "defaultValue": "tcp://localhost:1883"
+        },
+        {
+            "name": "EDGEX_SECURITY_SECRET_STORE",
+            "type": "boolean",
+            "defaultValue": "false"
+        },
+        {
+            "name": "CLIENTS_CORE_COMMAND_HOST",
+            "type": "string",
+            "defaultValue": "core-command"
+        },
+        {
+            "name": "CLIENTS_CORE_DATA_HOST",
+            "type": "string",
+            "defaultValue": "core-data"
+        },
+        {
+            "name": "CLIENTS_CORE_METADATA_HOST",
+            "type": "string",
+            "defaultValue": "core-metadata"
+        },
+        {
+            "name": "DATABASES_PRIMARY_HOST",
+            "type": "string",
+            "defaultValue": "redis"
+        },
+        {
+            "name": "MESSAGEQUEUE_TYPE",
+            "type": "string",
+            "defaultValue": "mqtt"
+        },
+        {
+            "name": "MESSAGEQUEUE_PROTOCOL",
+            "type": "string",
+            "defaultValue": "mqtt"
+        },
+        {
+            "name": "MESSAGEQUEUE_HOST",
+            "type": "string",
+            "defaultValue": "mqtt"
+        },
+        {
+            "name": "MESSAGEQUEUE_PORT",
+            "type": "string",
+            "defaultValue": "1883"
+        },
+        {
+            "name": "SERVICE_HOST",
+            "type": "string",
+            "defaultValue": "core-metadata"
+        },
+        {
+            "name": "NOTIFICATIONS_POSTDEVICECHANGES",
+            "type": "boolean",
+            "defaultValue": "false"
+        }
+    ],
+    "deployment": {
+        "services": {
+            "edgexpert-core-metadata": {
+                "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
+                "entrypoint": ["/core-metadata"],
+                "command": ["ENV EDGEXPERT_USE_CONSUL false"],
+                "privileged": false,
+                "network": "",
+                "secrets": {},
+                "user": "2002:2001",
+                "binds": [
+                    "/etc/localtime:/etc/localtime:ro",
+                    "license-data:/edgexpert/licenses/:ro"
+                ],
+                "ports": [
+                    {
+                        "HostPort": "59881:59881/tcp"
+                    }
+                ]
+            }
+        }
+    }
+}
