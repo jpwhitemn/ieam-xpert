@@ -1,7 +1,7 @@
 {
   "properties": [
+    { "name": "configuration", "value": "Xpert" }
   ],
   "constraints": [
-    "configuration == \"Xpert\""
   ]
 }

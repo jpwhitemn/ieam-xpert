@@ -1,0 +1,8 @@
+{
+    "HZN_ORG_ID": "iottechsys",
+    "MetadataVars": {
+        "DOCKER_IMAGE_BASE": "jpwhite/edgexpert-device-mqtt",
+        "SERVICE_NAME": "device-mqtt",
+        "SERVICE_VERSION": "0.0.1"
+    }
+}

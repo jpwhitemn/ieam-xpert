@@ -1,0 +1,8 @@
+{
+    "HZN_ORG_ID": "iottechsys",
+    "MetadataVars": {
+        "DOCKER_IMAGE_BASE": "jpwhite/edgexpert-app-configurable",
+        "SERVICE_NAME": "app-postgres-write",
+        "SERVICE_VERSION": "0.0.1"
+    }
+}

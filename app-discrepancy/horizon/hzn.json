@@ -1,0 +1,8 @@
+{
+    "HZN_ORG_ID": "iottechsys",
+    "MetadataVars": {
+        "DOCKER_IMAGE_BASE": "jpwhite/app-discrepancy",
+        "SERVICE_NAME": "app-discrepancy-package",
+        "SERVICE_VERSION": "0.0.1"
+    }
+}

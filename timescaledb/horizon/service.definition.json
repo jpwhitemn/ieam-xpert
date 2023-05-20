@@ -10,21 +10,35 @@
     "sharable": "singleton",
     "requiredServices": [],
     "userInput": [
-        {"name":"POSTGRES_DB", "type":"string","defaultValue":"edgex"},
-        {"name":"POSTGRES_USER", "type":"string","defaultValue":"iotechuser"},
-        {"name":"POSTGRES_PASSWORD", "type":"string","defaultValue":"p@55w0rd"}
+        {
+            "name": "POSTGRES_DB",
+            "type": "string",
+            "defaultValue": "edgex"
+        },
+        {
+            "name": "POSTGRES_USER",
+            "type": "string",
+            "defaultValue": "iotechuser"
+        },
+        {
+            "name": "POSTGRES_PASSWORD",
+            "type": "string",
+            "defaultValue": "p@55w0rd"
+        }
     ],
     "deployment": {
         "services": {
-            "timescaledb": {
+            "${SERVICE_NAME}": {
                 "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
                 "privileged": false,
                 "network": "",
                 "secrets": {},
+                "user": "root:root",
                 "binds": [
                     "/etc/localtime:/etc/localtime:ro",
                     "timescaledb-data:/var/lib/postgresql/data:z"
-                ]            }
+                ]
+            }
         }
     }
 }

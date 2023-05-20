@@ -1,7 +1,7 @@
 {
     "org": "$HZN_ORG_ID",
     "label": "$SERVICE_NAME for $ARCH",
-    "description": "Edge Xpert's UI",
+    "description": "Edge Xpert's discrepancy app service",
     "public": false,
     "documentation": "",
     "url": "$SERVICE_NAME",
@@ -11,19 +11,13 @@
     "requiredServices": [
         {
             "org": "$HZN_ORG_ID",
-            "url": "redis",
+            "url": "timescaledb",
             "version": "0.0.1",
             "arch": "amd64"
         },
         {
             "org": "$HZN_ORG_ID",
-            "url": "core-command",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "core-data",
+            "url": "mqtt-broker",
             "version": "0.0.1",
             "arch": "amd64"
         },
@@ -32,44 +26,9 @@
             "url": "core-metadata",
             "version": "0.0.1",
             "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "support-rulesengine",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "device-virtual",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "device-mqtt",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "app-postgres-write",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "app-discrepancy-package",
-            "version": "0.0.1",
-            "arch": "amd64"
         }
     ],
     "userInput": [
-        {
-            "name": "DATABASES_PRIMARY_HOST",
-            "type": "string",
-            "defaultValue": "redis"
-        },
         {
             "name": "EDGEX_SECURITY_SECRET_STORE",
             "type": "boolean",
@@ -81,24 +40,49 @@
             "defaultValue": "0.0.0.0"
         },
         {
+            "name": "MESSAGEQUEUE_HOST",
+            "type": "string",
+            "defaultValue": "mqtt-broker"
+        },
+        {
+            "name": "SERVICE_HOST",
+            "type": "string",
+            "defaultValue": "app-discrepancy-package"
+        },
+        {
             "name": "CLIENTS_CORE_METADATA_HOST",
             "type": "string",
             "defaultValue": "core-metadata"
         },
         {
-            "name": "CLIENTS_CORE_DATA_HOST",
+            "name": "TRIGGER_EDGEXMESSAGEBUS_SUBSCRIBEHOST_HOST",
             "type": "string",
-            "defaultValue": "core-data"
+            "defaultValue": "mqtt-broker"
         },
         {
-            "name": "CLIENTS_CORE_COMMAND_HOST",
+            "name": "TRIGGER_EDGEXMESSAGEBUS_SUBSCRIBEHOST_PORT",
             "type": "string",
-            "defaultValue": "core-command"
+            "defaultValue": "1883"
         },
         {
-            "name": "SERVICE_HOST",
+            "name": "TRIGGER_EDGEXMESSAGEBUS_SUBSCRIBEHOST_SUBSCRIBETOPICS",
             "type": "string",
-            "defaultValue": "xpert-manager"
+            "defaultValue": "edgex/events/abnormal"
+        },
+        {
+            "name": "DISCREPANCYPACKAGECONFIG_POSTGRESREADERCONFIG_HOST",
+            "type": "string",
+            "defaultValue": "timescaledb"
+        },
+        {
+            "name": "DISCREPANCYPACKAGECONFIG_MQTTCONFIG_BROKERADDRESS",
+            "type": "string",
+            "defaultValue": "tcp://<ip_of_vm-cts>:1883"
+        },
+        {
+            "name": "DISCREPANCYPACKAGECONFIG_MQTTCONFIG_TOPIC",
+            "type": "string",
+            "defaultValue": "vi/discrepancy"
         }
     ],
     "deployment": {
@@ -106,7 +90,7 @@
             "${SERVICE_NAME}": {
                 "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
                 "entrypoint": [
-                    "/edgexpert-manager"
+                    "/app-discrepancy-package"
                 ],
                 "command": [
                     "ENV EDGEXPERT_USE_CONSUL false"
@@ -121,7 +105,7 @@
                 ],
                 "ports": [
                     {
-                        "HostPort": "9090:9090/tcp"
+                        "HostPort": "59740:59740/tcp"
                     }
                 ]
             }

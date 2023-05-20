@@ -1,7 +1,7 @@
 {
     "org": "$HZN_ORG_ID",
     "label": "$SERVICE_NAME for $ARCH",
-    "description": "Edge Xpert's UI",
+    "description": "Edge Xpert's MQTT Device Service",
     "public": false,
     "documentation": "",
     "url": "$SERVICE_NAME",
@@ -11,19 +11,7 @@
     "requiredServices": [
         {
             "org": "$HZN_ORG_ID",
-            "url": "redis",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "core-command",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "core-data",
+            "url": "mqtt-broker",
             "version": "0.0.1",
             "arch": "amd64"
         },
@@ -32,44 +20,9 @@
             "url": "core-metadata",
             "version": "0.0.1",
             "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "support-rulesengine",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "device-virtual",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "device-mqtt",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "app-postgres-write",
-            "version": "0.0.1",
-            "arch": "amd64"
-        },
-        {
-            "org": "$HZN_ORG_ID",
-            "url": "app-discrepancy-package",
-            "version": "0.0.1",
-            "arch": "amd64"
         }
     ],
     "userInput": [
-        {
-            "name": "DATABASES_PRIMARY_HOST",
-            "type": "string",
-            "defaultValue": "redis"
-        },
         {
             "name": "EDGEX_SECURITY_SECRET_STORE",
             "type": "boolean",
@@ -86,19 +39,14 @@
             "defaultValue": "core-metadata"
         },
         {
-            "name": "CLIENTS_CORE_DATA_HOST",
+            "name": "MESSAGEQUEUE_HOST",
             "type": "string",
-            "defaultValue": "core-data"
-        },
-        {
-            "name": "CLIENTS_CORE_COMMAND_HOST",
-            "type": "string",
-            "defaultValue": "core-command"
+            "defaultValue": "mqtt-broker"
         },
         {
             "name": "SERVICE_HOST",
             "type": "string",
-            "defaultValue": "xpert-manager"
+            "defaultValue": "device-mqtt"
         }
     ],
     "deployment": {
@@ -106,7 +54,7 @@
             "${SERVICE_NAME}": {
                 "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
                 "entrypoint": [
-                    "/edgexpert-manager"
+                    "/device-mqtt"
                 ],
                 "command": [
                     "ENV EDGEXPERT_USE_CONSUL false"
@@ -121,7 +69,7 @@
                 ],
                 "ports": [
                     {
-                        "HostPort": "9090:9090/tcp"
+                        "HostPort": "59982:59982/tcp"
                     }
                 ]
             }
