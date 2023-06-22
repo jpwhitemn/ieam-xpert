@@ -26,6 +26,12 @@
             "url": "core-metadata",
             "version": "0.0.1",
             "arch": "amd64"            
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "device-virtual",
+            "version": "0.0.1",
+            "arch": "amd64"
         }
     ],
     "userInput": [
