@@ -1,30 +1,30 @@
 # add profiles
 
-curl -s -o /dev/null -X POST -w "%{http_code}" -F "file=@./profiles/profile.vi.yaml" http://10.0.0.216:59881/api/v2/deviceprofile/uploadfile
+curl -s -o /dev/null -X POST -w "%{http_code}" -F "file=@./profiles/profile.vi.yaml" http://10.0.0.75:59881/api/v2/deviceprofile/uploadfile
 
-curl -s -o /dev/null -X POST -w "%{http_code}" -F "file=@./profiles/profile.rfid.yaml" http://10.0.0.216:59881/api/v2/deviceprofile/uploadfile
+curl -s -o /dev/null -X POST -w "%{http_code}" -F "file=@./profiles/profile.rfid.yaml" http://10.0.0.75:59881/api/v2/deviceprofile/uploadfile
 
-curl -s -o /dev/null -X POST -w "%{http_code}" -F "file=@./profiles/profile.barcode.yaml" http://10.0.0.216:59881/api/v2/deviceprofile/uploadfile
+curl -s -o /dev/null -X POST -w "%{http_code}" -F "file=@./profiles/profile.barcode.yaml" http://10.0.0.75:59881/api/v2/deviceprofile/uploadfile
 
 # add devices
 
-curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.216:59881/api/v2/device --data-binary "@./devices/device-barcode.json"
+curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.75:59881/api/v2/device --data-binary "@./devices/device-barcode.json"
 
-curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.216:59881/api/v2/device --data-binary "@./devices/device-rfid.json"
+curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.75:59881/api/v2/device --data-binary "@./devices/device-rfid.json"
 
-curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.216:59881/api/v2/device --data-binary "@./devices/device-vi.json"
+curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.75:59881/api/v2/device --data-binary "@./devices/device-vi.json"
 
 # add rules
 
-curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.216:59862/api/v2/rule --data-binary "@./rules/ProductMistmach.grl"
+curl -s -o /dev/null -X POST -w "%{http_code}" http://10.0.0.75:59862/api/v2/rule --data-binary "@./rules/ProductMistmach.grl"
 
 
 # Post RFID or bar code reader event
-curl -s -o /dev/null -w "%{http_code}" http://10.0.0.216:59882/api/v2/ping
+curl -s -o /dev/null -w "%{http_code}" http://10.0.0.75:59882/api/v2/ping
 
 
-curl -s -o /dev/null -w "%{http_code}" -X GET http://10.0.0.216:59882/api/v2/device/name/RFIDScanner/product_id?ds-pushevent=yes
+curl -s -o /dev/null -w "%{http_code}" -X GET http://10.0.0.75:59882/api/v2/device/name/RFIDScanner/product_id?ds-pushevent=yes
 
-curl -s -o /dev/null -w "%{http_code}" -X GET http://10.0.0.216:59882/api/v2/device/name/BarcodeReader/product_id?ds-pushevent=yes
+curl -s -o /dev/null -w "%{http_code}" -X GET http://10.0.0.75:59882/api/v2/device/name/BarcodeReader/product_id?ds-pushevent=yes
 
-mosquitto_pub -h 10.0.0.216 -m "{\"frame_id\":\"4ef4e7b1-ae55-4848-bce1-82a8863efdff\", \"class_id\":\"coke\", \"probability\":\"0.3190558850765228\",\"frame\":\"foo\",\"frame_content_type\": \"image/png\"}" -t geti_classification_demo/object
+mosquitto_pub -h 10.0.0.75 -m "{\"frame_id\":\"4ef4e7b1-ae55-4848-bce1-82a8863efdff\", \"class_id\":\"coke\", \"probability\":\"0.3190558850765228\",\"frame\":\"foo\",\"frame_content_type\": \"image/png\"}" -t geti_classification_demo/object

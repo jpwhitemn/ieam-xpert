@@ -77,7 +77,7 @@
         {
             "name": "DISCREPANCYPACKAGECONFIG_MQTTCONFIG_BROKERADDRESS",
             "type": "string",
-            "defaultValue": "tcp://<ip_of_vm-cts>:1883"
+            "defaultValue": "tcp://mqtt-broker:1883"
         },
         {
             "name": "DISCREPANCYPACKAGECONFIG_MQTTCONFIG_TOPIC",
