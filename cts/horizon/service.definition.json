@@ -1,0 +1,129 @@
+{
+    "org": "$HZN_ORG_ID",
+    "label": "$SERVICE_NAME for $ARCH",
+    "description": "CTS",
+    "public": false,
+    "documentation": "",
+    "url": "$SERVICE_NAME",
+    "version": "$SERVICE_VERSION",
+    "arch": "$ARCH",
+    "sharable": "singleton",
+    "requiredServices": [
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "timescaledb",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "mqtt-broker",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "core-metadata",
+            "version": "0.0.1",
+            "arch": "amd64"
+        },        
+        {
+            "org": "$HZN_ORG_ID",
+            "url": "xpert-manager",
+            "version": "0.0.1",
+            "arch": "amd64"
+        }
+    ],
+    "userInput": [
+        {
+            "name": "EDGEX_SECURITY_SECRET_STORE",
+            "type": "boolean",
+            "defaultValue": "false"
+        },
+        {
+            "name": "SERVICE_HOST",
+            "type": "string",
+            "defaultValue": "vi-cts"
+        },        
+        {
+            "name": "SERVICE_SERVERBINDADDR",
+            "type": "string",
+            "defaultValue": "0.0.0.0"
+        },
+        {
+            "name": "WRITABLE_INSECURESECRETS_DB_SECRETS_USERNAME",
+            "type": "string",
+            "defaultValue": "iotechuser"
+        },
+        {
+            "name": "WRITABLE_INSECURESECRETS_DB_SECRETS_PASSWORD",
+            "type": "string",
+            "defaultValue": "p@55w0rd"
+        },
+        {
+            "name": "DATABASES_PRIMARY_HOST",
+            "type": "string",
+            "defaultValue": "timescaledb"
+        },
+        {
+            "name": "MQTTBROKER_HOST",
+            "type": "string",
+            "defaultValue": "mqtt-broker"
+        },
+        {
+            "name": "GETIAPI_BASEURL",
+            "type": "string",
+            "defaultValue": "https://169.46.23.138/api/v1"
+        },
+        {
+            "name": "GETIAPI_DATASETID",
+            "type": "string",
+            "defaultValue": "64d6a447ca902ac0cf7d93b3"
+        },
+        {
+            "name": "GETIAPI_MODELTEMPLATEID",
+            "type": "string",
+            "defaultValue": "Custom_Image_Classification_EfficinetNet-B0"
+        },
+        {
+            "name": "GETIAPI_PROJECTID",
+            "type": "string",
+            "defaultValue": "64d6a447ca902ac0cf7d93a8"
+        },
+        {
+            "name": "GETIAPI_TASKID",
+            "type": "string",
+            "defaultValue": "64d6a447ca902ac0cf7d93ac"
+        },        
+        {
+            "name": "GETIAPI_TRAINFROMSCRATCH",
+            "type": "string",
+            "defaultValue": "true"
+        },        
+        {
+            "name": "GETIAPI_WORKSPACEID",
+            "type": "string",
+            "defaultValue": "64d3e9eb5a54c7314aa5b484"
+        },        
+        {
+            "name": "WRITABLE_INSECURESECRETS_GETI_SECRETS_SERVICEID",
+            "type": "string",
+            "defaultValue": "mVnIfKMILVmbAOCoIw0mKx3KzCTwNbdd:FjfOfGXmPQ8lZ2odEyfk9T2KWoUYClIh"
+        }
+        ],
+    "deployment": {
+        "services": {
+            "${SERVICE_NAME}": {
+                "image": "${DOCKER_IMAGE_BASE}:$SERVICE_VERSION",
+                "privileged": false,
+                "network": "",
+                "secrets": {},
+                "ports": [
+                    {
+                        "HostPort": "9091:9091/tcp"
+                    }
+                ]
+            }
+        }
+    }
+}
