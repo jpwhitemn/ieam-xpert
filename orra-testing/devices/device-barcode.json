@@ -1,0 +1,22 @@
+[
+  {
+    "apiVersion": "v2",
+    "device" : {
+      "name" :"BarcodeReader",
+      "description":"Simulated Barcode Reader",
+      "adminState":"UNLOCKED",
+      "operatingState":"UP",
+      "protocols": {
+        "other": {
+	      "Address": "device-virtual-string-01",
+	      "Protocol": "300"
+        }
+      },
+      "labels":[
+	    "intel"
+      ],
+      "serviceName":"device-virtual",
+      "profileName":"Simulated-Barcode-Reader"
+    }
+  }
+]

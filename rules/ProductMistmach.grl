@@ -1,7 +1,0 @@
-rule ProductMismatch "Detect Product Mismatch" {
-  when
-    !Conditions.AllEqualIgnoreCase("RFIDScanner.product_id", "BarcodeReader.product_id", "geti_classification_demo.class_id")
-  then
-    Actions.PublishSensorFusionEvent("edgex/events/abnormal", "sensor_fusion_profile", "sensor_fusion_device", "sensor_fusion_source", "RFIDScanner.product_id", "BarcodeReader.product_id", "geti_classification_demo.class_id", "geti_classification_demo.frame_id", "geti_classification_demo.probability", "geti_classification_demo.frame_content_type", "geti_classification_demo.frame");
-    Retract("ProductMismatch");
-}

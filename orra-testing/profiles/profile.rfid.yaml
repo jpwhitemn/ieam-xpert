@@ -1,0 +1,34 @@
+name: "Simulated-RFID-Scanner"
+manufacturer: "IOTech"
+model: "Random-String-Device"
+labels:
+  - "intel"
+description: "Simulated RFID Scanner for Intel Visual Inference Project"
+
+deviceResources:
+  -
+    name: "EnableRandomization_RFIDScanner"
+    isHidden: true
+    description: "used to decide whether to re-generate a random value"
+    properties:
+      valueType: "Bool"
+      readWrite: "W"
+      defaultValue: "false"
+  -
+    name: "product_id"
+    isHidden: false
+    description: "RFID Scan value"
+    properties:
+      valueType: "String"
+      readWrite: "RW"
+    attributes:
+      simulatedValues: ["coke","chocolate","yogurt"]
+
+deviceCommands:
+  -
+    name: "WriteRFIDScanValue"
+    readWrite: "W"
+    isHidden: false
+    resourceOperations:
+      - { deviceResource: "product_id" }
+      - { deviceResource: "EnableRandomization_RFIDScanner", defaultValue: "false" }

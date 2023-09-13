@@ -1,0 +1,41 @@
+https://cp-console.ieam42-edge-8e873dd4c685acf6fd2f13f4cdfb05bb-0000.us-south.containers.appdomain.cloud/common-nav/cli
+
+
+cloudctl login -a https://cp-console.ieam42-edge-8e873dd4c685acf6fd2f13f4cdfb05bb-0000.us-south.containers.appdomain.cloud -u iottechuser -p ttch7#rhqpkx --skip-ssl-validation
+
+Targeted account iottechsys
+Targeted namespace ibm-edge
+Configuring kubectl ...
+Property "clusters.mycluster" unset.
+Property "users.mycluster-user" unset.
+Property "contexts.mycluster-context" unset.
+Cluster "mycluster" set.
+User "mycluster-user" set.
+Context "mycluster-context" created.
+Switched to context "mycluster-context".
+OK
+Configuring helm: /home/jim/.helm
+OK
+
+cloudctl iam api-key-create "jim" -d "jims-api-key"
+
+Creating API key jim as iottechuser...
+OK
+API key jim created
+Please preserve the API key! It cannot be retrieved after it's created.               
+Name          jim   
+Description   jims-api-key   
+Bound To      crn:v1:icp:private:iam-identity:::IBMid:user:iottechuser   
+Created At    2023-04-13T21:47+0000   
+API Key       RlkykjRGeVK0QOTxM3HVSD9vOavxSvHJzwQupDnJRrE3  
+
+
+export HZN_ORG_ID=iottechsys
+export HZN_EXCHANGE_USER_AUTH="iamapikey:ipBS9ZE6Nc-O7F24j3-Qvsp0LBalDfPQ4m5rogJUiLWI"
+export HZN_EXCHANGE_URL=https://cp-console.ieam42-edge-8e873dd4c685acf6fd2f13f4cdfb05bb-0000.us-south.containers.appdomain.cloud/edge-exchange/v1
+export HZN_FSS_CSSURL=https://cp-console.ieam42-edge-8e873dd4c685acf6fd2f13f4cdfb05bb-0000.us-south.containers.appdomain.cloud/edge-css/
+
+
+curl -u "$HZN_ORG_ID/$HZN_EXCHANGE_USER_AUTH" -k -o agent-install.sh $HZN_FSS_CSSURL/api/v1/objects/IBM/agent_files/agent-install.sh/data
+chmod +x agent-install.sh
+

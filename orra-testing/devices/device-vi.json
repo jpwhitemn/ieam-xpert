@@ -1,0 +1,19 @@
+[
+  {
+    "apiVersion": "v2",
+    "device" : {
+      "name" :"geti_classification_demo",
+      "description":"OpenVINO VI device",
+      "adminState":"UNLOCKED",
+      "operatingState":"UP",
+      "labels":[
+	    "intel"
+      ],
+      "protocols": {
+        "MQTT": {}
+      },
+      "serviceName":"device-mqtt",
+      "profileName":"VI_Results_Profile"
+    }
+  }
+]
